@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 5!</title>
+</head>
+<body>
+<h1>Давай зробимо це!</h1>
+{% for do in do_list|dictsortreversed:"priority" %}
+<p>{{ do }}</p>
+{% endfor %}
+</body>
+
+</html>
