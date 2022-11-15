@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 6!</title>
+</head>
+<body>
+<h1>Список осіб</h1>
+<ol>
+{% for person in persons %}
+<li>{{ person.name }} {{ person.surname }}</li>
+{% endfor %}
+</ol>
+</body>
+
+</html>

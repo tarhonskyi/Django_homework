@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 7!</title>
+</head>
+<body>
+<h1>Список запитань</h1>
+{% if latest_question_list %}
+<ul>
+{% for question in latest_question_list %}
+    <li><a href="{% url 'lesson_3:question_detail' question.id %}">{{ question.question_text }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+Список завдань порожній
+{% endif %}
+
+
+</body>
+
+</html>
