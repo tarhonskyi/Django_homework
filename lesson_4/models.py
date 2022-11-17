@@ -31,7 +31,7 @@ class Actor(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length=50, verbose_name="Ім'я автора")
-    second_name = models.CharField(max_length=50, verbose_name="По батькові автора", blank=True, default='')
+    second_name = models.CharField(max_length=50, verbose_name="По батькові автора", blank=True, null=True)
     surname = models.CharField(max_length=50, verbose_name="Прізвище автора")
     birth_date = models.DateField(auto_now=False, verbose_name='Дата народження')
     country = models.CharField(max_length=50, verbose_name='Країна походження')
@@ -48,7 +48,7 @@ class Author(models.Model):
 class PublishingHouse(models.Model):
     name = models.CharField(max_length=50, verbose_name='Назва видавництва')
     country = models.CharField(max_length=50, verbose_name='Країна видавництва')
-    motto = models.TextField(max_length=150, verbose_name='Гасло компанії', blank=True, default='')
+    motto = models.TextField(max_length=150, verbose_name='Гасло компанії', blank=True, null=True)
     established = models.DateField(auto_now=False, verbose_name='Дата заснування')
 
     def __str__(self):
@@ -92,12 +92,14 @@ class BookInStore(models.Model):
         ('FR', 'Французька'),
         ('DE', 'Німецька'),
     )
-    book = models.ForeignKey(Book, verbose_name='', on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, verbose_name='Книга', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Ціна екземпляру')
     quantity = models.PositiveIntegerField(verbose_name='Кількість екземплярів')
     language = models.CharField(max_length=50, choices=LANGUAGE_CHOICES, verbose_name='Мова видання')
     publishing_house = models.ForeignKey(PublishingHouse, verbose_name='Видавництво', on_delete=models.CASCADE)
-    number_of_pages = models.PositiveIntegerField(verbose_name='Кількість сторінок', blank=True, default=0)
+    number_of_pages = models.PositiveIntegerField(verbose_name='Кількість сторінок', blank=True, null=True)
+    add_to_store_date = models.DateTimeField(auto_now_add=False, verbose_name='Дата надходження',
+                                             blank=True, null=True)
 
     def __str__(self):
         return f"{self.book} x {self.quantity}"
@@ -105,4 +107,4 @@ class BookInStore(models.Model):
     class Meta:
         verbose_name = "Екземпляри книги"
         verbose_name_plural = "Екземпляри книжок"
-        ordering = ('quantity',)
+        ordering = ('add_to_store_date',)
