@@ -29,6 +29,9 @@ class Actor(models.Model):
         ordering = ('name',)
 
 
+"""Опис класів для завдання- 4-7"""
+
+
 class Author(models.Model):
     name = models.CharField(max_length=50, verbose_name="Ім'я автора")
     second_name = models.CharField(max_length=50, verbose_name="По батькові автора", blank=True, null=True)
@@ -108,3 +111,4 @@ class BookInStore(models.Model):
         verbose_name = "Екземпляри книги"
         verbose_name_plural = "Екземпляри книжок"
         ordering = ('add_to_store_date',)
+
