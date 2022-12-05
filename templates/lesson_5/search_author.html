@@ -1,0 +1,21 @@
+{% extends 'lesson_5/main_3.html' %}
+
+{% block title %}Пошук автора{% endblock title %}
+
+{% block head %}Пошук автора{% endblock head %}
+
+{% block content %}
+<form action="/lesson_5/search_author" method="get">
+    <input type="text" name="name">Введіть ім'я автора<br>
+    <input type="text" name="surname">Введіть прізвище автора<br>
+    <input type="submit" value="Пошук">
+</form>
+
+{% if searched_authors %}
+<h1>Перелік авторів</h1>
+{% for author in searched_authors %}
+<li>{{ author }}</li>
+{% endfor %}
+{% endif %}
+
+{% endblock content %}
