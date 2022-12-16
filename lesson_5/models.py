@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Product(models.Model):
@@ -16,7 +17,13 @@ class Product(models.Model):
 
 class Comment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    text = models.TextField(max_length=255, verbose_name='Текст коментаря')
+    date = models.DateTimeField(auto_now=True)
+    text = models.TextField(max_length=255, verbose_name='Текст коментаря', null=False)
+    rating = models.IntegerField(default=0, verbose_name='',
+                                 validators=[
+                                     MaxValueValidator(5),
+                                     MinValueValidator(0),
+                                 ])
 
     def __str__(self):
         return self.text

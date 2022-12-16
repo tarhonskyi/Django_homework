@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Головна сторінка уроку 7</title>
+    {% if user.is_authenticated %}
+    <a href="logout">Вийти, {{user.username}}</a>
+    {% else %}
+    <a href="register">Реєстрація</a>
+    <a href="login">Авторизація</a>
+    {% endif %}
+
+</head>
+<body>
+{% for elem in authors %}
+<p>{{ elem }}</p>
+{% endfor %}
+</body>
+</html>
